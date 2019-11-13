@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>
+            voting app 
+        </title>
+
+        
+ <!--This is the firebase configuration -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- Firebase App is always required and must be first -->
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+
+<!-- Add additional services that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCtk2M5fDwYltnP1yUhk2EZPM3HfAqOXoA",
+    authDomain: "nodefirebase-87b89.firebaseapp.com",
+    databaseURL: "https://nodefirebase-87b89.firebaseio.com",
+    projectId: "nodefirebase-87b89",
+    storageBucket: "nodefirebase-87b89.appspot.com",
+    messagingSenderId: "828846764561",
+    appId: "1:828846764561:web:27679cb42730b7c2d0f7b0",
+    measurementId: "G-4EKRLTKX9S"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+        
+        
+        
+    </head>
+    
+    <body>
+        <h1>
+            This Is a Voting app
+        </h1>
+        <p>Login With Firebase</p>
+        <h3 id="google-display-name"></h3>
+        <img id="google-pic" src="" />
+        <p id="google-email"></p>
+        <button onclick={sign_in_with_google()}> Sign in with google</button>
+        <script>
+        
+            function sign_in_with_google(){
+                var googleAuthProvider = new firebase.auth.GoogleAuthProvider
+                    firebase.auth().signInWithPopup(googleAuthProvider)
+                    .then((data)=>{
+                        console.log(data);
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                    });
+                }
+        </script>
+        
+    </body>
+</html>
