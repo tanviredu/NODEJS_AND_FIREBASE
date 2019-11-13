@@ -15,18 +15,31 @@ function isAuthenticate(){
     // but before you do that this will pass
     // through this function  that we call middleware
     // if he pass then go to the page
-    // in
+    // in the middlware we have to do a 
+    //additional parameter next so after that 
+    // it will pass the result to the next
 }
 
-//var serviceAccount = require('')
+var serviceAccount = require('./sdk.json')
 
 var firebaseadmin = admin.initializeApp({
     credential : admin.credential.cert(serviceAccount),
-    databaseURL:''
+    databaseURL:'https://nodefirebase-87b89.firebaseio.com'
+    
 })
 
 // we want to serve the javascript and html
 // ejs means embadded javascript
+
+// we will make a route to the homecomingQUeen page
+// but to access it you have to go through  a middleware
+// the rule of adding a  middleware is in a route function
+//first is the url then then callback function
+//middeware sits between them
+
+app.get('/homecoming-queen',isAuthenticate,(req,res)=>{
+    res.render('homecomingQueen.ejs');
+})
 
 app.set('view engine','ejs'); // we no longer use the normal html and css
 app.use(bodyParser.json());

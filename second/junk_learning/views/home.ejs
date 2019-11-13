@@ -43,22 +43,39 @@
             This Is a Voting app
         </h1>
         <p>Login With Firebase</p>
-        <h3 id="google-display-name"></h3>
+        <h3 id="google-DisplayName"></h3>
         <img id="google-pic" src="" />
         <p id="google-email"></p>
         <button onclick={sign_in_with_google()}> Sign in with google</button>
         <script>
-        
-            function sign_in_with_google(){
-                var googleAuthProvider = new firebase.auth.GoogleAuthProvider
-                    firebase.auth().signInWithPopup(googleAuthProvider)
-                    .then((data)=>{
-                        console.log(data);
-                    })
-                    .catch((err)=>{
-                        console.log(err);
-                    });
+
+            function checkifloggedin(){
+                if(localStorage.getItem('firebase_idToken')){
+                    console.log("you");
+                }else{
+                    // something else
+
+                    console.log('you are not signed in');
                 }
+            }
+
+
+
+            function sign_in_with_google(){
+                checkifloggedin();
+                var googleAuthProvider = new firebase.auth.GoogleAuthProvider
+                firebase.auth().signInWithPopup(googleAuthProvider)
+                .then((data)=>{
+                    console.log(data);
+
+                    // savingthe uid in the localstorage
+                    var idToken = data.credential.idToken
+                    localStorage.setItem('firebase_idToken',idToken)
+                                    })
+                .catch((err)=>{
+                    console.log(err);
+                });
+            }
         </script>
         
     </body>
